@@ -1,0 +1,69 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-host-namespaces
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+    - name: disallow-host-network
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - kube-system
+                - istio-system
+                - kyverno
+                - argocd
+                - security-ops
+      validate:
+        message: "hostNetwork must not be enabled"
+        pattern:
+          spec:
+            =(hostNetwork): "false"
+    - name: disallow-host-pid
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - kube-system
+                - istio-system
+                - kyverno
+                - argocd
+                - security-ops
+      validate:
+        message: "hostPID must not be enabled"
+        pattern:
+          spec:
+            =(hostPID): "false"
+    - name: disallow-host-ipc
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      exclude:
+        any:
+          - resources:
+              namespaces:
+                - kube-system
+                - istio-system
+                - kyverno
+                - argocd
+                - security-ops
+      validate:
+        message: "hostIPC must not be enabled"
+        pattern:
+          spec:
+            =(hostIPC): "false"
+

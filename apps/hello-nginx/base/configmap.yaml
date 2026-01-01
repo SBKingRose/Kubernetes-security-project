@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-nginx-html
+  namespace: hello-nginx
+data:
+  index.html: |
+    <!doctype html>
+    <html>
+      <head><title>hello</title></head>
+      <body>
+        <h1>hello from nginx</h1>
+      </body>
+    </html>
+

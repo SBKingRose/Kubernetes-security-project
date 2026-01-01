@@ -1,0 +1,9 @@
+apiVersion: security.demo.cypher/v1alpha1
+kind: SecurityProfile
+metadata:
+  name: hello-nginx
+spec:
+  namespace: hello-nginx
+  istioStrictMtls: true
+  ciliumRestrictIngress: true
+

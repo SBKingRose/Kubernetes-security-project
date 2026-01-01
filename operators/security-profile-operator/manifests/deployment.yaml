@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: security-profile-operator
+  namespace: security-ops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: security-profile-operator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: security-profile-operator
+    spec:
+      serviceAccountName: security-profile-operator
+      containers:
+        - name: operator
+          image: ghcr.io/REPLACE_ME/security-profile-operator:0.1.0
+          imagePullPolicy: IfNotPresent
+

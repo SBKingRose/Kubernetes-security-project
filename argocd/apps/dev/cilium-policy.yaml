@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cilium-policy
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: REPLACE_ME_REPO_URL
+    targetRevision: main
+    path: platform/cilium/policies/hello-nginx
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: hello-nginx
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+

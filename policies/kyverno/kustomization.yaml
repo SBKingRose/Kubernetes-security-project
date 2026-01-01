@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - clusterpolicies/require-baseline-pod-security.yaml
+  - clusterpolicies/disallow-host-namespaces.yaml
+

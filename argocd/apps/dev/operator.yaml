@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: security-profile-operator
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  source:
+    repoURL: REPLACE_ME_REPO_URL
+    targetRevision: main
+    path: operators/security-profile-operator/manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: security-ops
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+
